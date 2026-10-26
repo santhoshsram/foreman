@@ -20,6 +20,23 @@ Built on [conductor](https://github.com/gemini-cli-extensions/conductor)
 /plugin install foreman@foreman
 ```
 
+### Cloud sessions
+
+A cloud session loads neither your user plugins nor plugins a repo declares
+in `.claude/settings.json`. Install foreman from the cloud environment's
+setup script instead: open the environment's settings, then **Setup
+script**, and paste:
+
+```bash
+#!/bin/bash
+claude plugin marketplace add santhoshsram/foreman
+claude plugin install foreman@foreman
+```
+
+The environment cache keeps the install, so the script runs again only when
+the cache is rebuilt. To pick up a new foreman version sooner, edit the
+script, which rebuilds the cache.
+
 ## Status
 
 0.1.0: every v0 skill and agent is built, not yet run end to end.
