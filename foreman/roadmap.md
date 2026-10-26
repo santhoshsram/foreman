@@ -5,7 +5,7 @@ One line per future track: its id, the line worded as its
 `R<n>` and is never reused, so a removed line leaves a gap. new-track
 removes the line it starts.
 
-Next id: R12
+Next id: R13
 
 - R1: Multi-session planning above tracks: a map of decision tickets resolved
   one per session. From Matt Pocock's `wayfinder` skill,
@@ -40,10 +40,20 @@ Next id: R12
   phase first says its own phase is done, then asks the user whether to
   start the next one, for example new-track before shape. From a 2026-10-26
   session in focus mode, where new-track's hand-off to shape went unseen.
-- R11: Install foreman in cloud sessions from a cloud environment's setup
-  script (`claude plugin marketplace add santhoshsram/foreman`, then
-  `claude plugin install foreman@foreman`), tested in one session, and
-  documented in the README. A plugin the repo declares in
-  `.claude/settings.json` never loads in a cloud session, and copying
-  foreman into each project leaves a second version to maintain. From a
-  2026-10-26 session on cloud use.
+- R12: Harden the guard and gates so a worker cannot slip past them. Today
+  they keep honest workers in their lanes, but each check below fails open:
+  - `gate.sh` keeps its base tree under `.git/`, which a worker can
+    overwrite before the diff check runs.
+  - `gate.sh` lists untracked files with `--exclude-standard`, so a file
+    hidden by `.gitignore`, `.git/info/exclude` or `core.excludesFile`
+    escapes the diff check, and a worker can add such a rule.
+  - `guard-paths.sh` allows any write outside the repo, such as
+    `~/.gitconfig` or the plugin's own scripts, and does not resolve
+    symlinks.
+  - The Bash check matches writes and `git` calls by regex and allows
+    whatever it does not match: quotes, backslashes, `$(...)` and variables
+    get past it.
+  - A hook that exits with anything but 2, such as a crash or a missing
+    script, lets the tool call through with no warning.
+  Fail closed for foreman workers instead. From a 2026-10-26 security review
+  of the first public commit.
