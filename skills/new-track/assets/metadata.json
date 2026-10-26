@@ -1,0 +1,10 @@
+{
+  "id": "<id>",
+  "type": "<type>",
+  "status": "active",
+  "branch": "<branch>",
+  "phase": "shape",
+  "sub_step": "user",
+  "created_at": "<UTC, 2026-10-23T09:00:00Z>",
+  "updated_at": "<same as created_at>"
+}

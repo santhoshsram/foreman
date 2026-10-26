@@ -1,0 +1,13 @@
+Foreman
+Copyright 2026 Santhosh Sundararaman
+
+This product includes material derived from:
+
+- conductor, https://github.com/gemini-cli-extensions/conductor
+  Copyright 2025 Google LLC, Apache License 2.0
+
+- elephant-goldfish-model, https://github.com/google/elephant-goldfish-model
+  Copyright 2026 Google LLC, Apache License 2.0
+
+The commits taken and the material derived from each are listed in
+foreman/upstreams.md.

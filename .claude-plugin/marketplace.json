@@ -1,0 +1,19 @@
+{
+  "name": "foreman",
+  "owner": {
+    "name": "Santhosh Sundararaman",
+    "email": "5712605+santhoshsram@users.noreply.github.com"
+  },
+  "metadata": {
+    "description": "Foreman: a light development harness for Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "foreman",
+      "source": "./",
+      "description": "One routine for every project and every feature: setup once, then per track shape, implement, prove, ship.",
+      "version": "0.1.0",
+      "keywords": ["workflow", "harness", "spec", "tdd", "tracks", "sdlc"]
+    }
+  ]
+}

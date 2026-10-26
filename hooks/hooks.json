@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/guard-paths.sh" }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "^(foreman:)?test-writer$",
+        "hooks": [
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/gate.sh diff tests-only", "timeout": 120 }
+        ]
+      },
+      {
+        "matcher": "^(foreman:)?implementer$",
+        "hooks": [
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/gate.sh diff no-tests", "timeout": 120 }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "foreman",
+  "version": "0.1.0",
+  "description": "One routine for every project and every feature: setup once, then per track shape, implement, prove, ship. Project knowledge and track state live as markdown in the repo.",
+  "author": {
+    "name": "Santhosh Sundararaman",
+    "url": "https://github.com/santhoshsram"
+  },
+  "repository": "https://github.com/santhoshsram/foreman",
+  "license": "Apache-2.0",
+  "keywords": ["workflow", "harness", "spec", "tdd", "tracks", "sdlc"]
+}
