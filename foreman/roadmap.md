@@ -5,7 +5,7 @@ One line per future track: its id, the line worded as its
 `R<n>` and is never reused, so a removed line leaves a gap. new-track
 removes the line it starts.
 
-Next id: R14
+Next id: R15
 
 - R1: Multi-session planning above tracks: a map of decision tickets resolved
   one per session. From Matt Pocock's `wayfinder` skill,
@@ -49,3 +49,6 @@ Next id: R14
   2026-10-26 security review of the first public commit; hardening the
   guard and gate in bash instead (R12) was dropped on 2026-10-27 as
   over-engineering for a solo-developer harness.
+- R14: Project-wide `foreman/decisions.md` for big decisions that affect the
+  whole project. Today a `decisions.md` exists only per track, so a big
+  decision is archived with its track. From the user on 2026-11-02.
