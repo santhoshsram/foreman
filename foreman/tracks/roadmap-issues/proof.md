@@ -1,13 +1,16 @@
 # Proof: Roadmap in GitHub issues as a setup option
 
-Built at `4f1afac`. The built thing is skill prose, run by a model. Runs
+Built at `8c6f5fa`. Since the first proof at `4f1afac`, only
+`skills/shape/assets/run-unattended.md` changed among built files, so AC13
+was re-proved and the other lines stand. The built thing is skill prose, run by a model. Runs
 used fresh subagents following the skill files of this worktree, in a
 throwaway copy of the repo with a github.com origin and the GitHub issues
 form of `## Roadmap`. Every `gh` call ran with `GH_CONFIG_DIR` set to an
 empty temp dir, so gh was logged out and no real client config was read.
 A static check (`grep -F` of each spec output string in the skill that
-prints it) found 38 of 38 strings; it shows the contract text is there, not
-that a run prints it.
+prints it) found 37 of 38 strings; the miss is `Closes #N` in
+`skills/ship/SKILL.md`, which now lives in `skills/ship/assets/pr-body.md`
+(see AC8). It shows the contract text is there, not that a run prints it.
 
 | AC | Proof | Evidence | Result |
 |---|---|---|---|
@@ -23,7 +26,7 @@ that a run prints it.
 | AC10 | command output | Static only: shape's defer runs the Add command, body ending `Deferred from <id>.`. See Manual | manual |
 | AC11 | command output | Static only: setup, new-track, status and shape fall back to `roadmap.md` without a GitHub issues `## Roadmap`. See Manual | manual |
 | AC12 | command output | new-track `#1` run, gh logged out, printed the two gh failure lines of spec §Experience and wrote nothing. Added future track and shape's defer not run; see Manual | manual |
-| AC13 | command output | `diff` of the spec §Experience block against `skills/shape/assets/run-unattended.md`: identical. Shape and status print that file verbatim; `grep -E '/model\|auto mode'` finds nothing in it, in `skills/shape/SKILL.md` or in `skills/status/SKILL.md` | pass |
+| AC13 | command output | `diff` of the spec §Experience block, the `/goal` line ending on `phase=ship`, `status=blocked` or a stop for the user, against `skills/shape/assets/run-unattended.md` at `8c6f5fa`: identical; no file under `skills/` holds the old line. Shape and status print that file verbatim; `grep -E '/model\|auto mode'` finds nothing in it, in `skills/shape/SKILL.md` or in `skills/status/SKILL.md` | pass |
 | AC14 | command output | implement run by a Sonnet subagent printed `Implement runs on Opus. This session runs on Sonnet 5.5.` then ``Run `/model opus`, then send the /goal line again.``, byte for byte the spec block; `git status --porcelain` stayed empty afterwards | pass |
 
 ## Manual
