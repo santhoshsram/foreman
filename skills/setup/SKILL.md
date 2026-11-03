@@ -79,11 +79,94 @@ project; anything about one feature belongs to a track.
 | `ux.md` | UI projects only. Fixed places and navigation; states; the nearest screen or command for each flow; a pointer to root `DESIGN.md` for tokens, open if it does not exist |
 | `workflow.md` | From `assets/workflow.md`. Commands, test paths, scopes and conventions come from the repo; a command the repo lacks is `none yet`, never invented. `gate.sh` and the worker guards parse the Commands rows and Test paths, so keep their names. Ask only: what does done mean, and where is it released |
 | `code_styleguides/` | Copied, see below |
-| `learnings.md`, `tracks.md`, `roadmap.md` | Copied from `assets/` as they are |
+| `learnings.md`, `tracks.md` | Copied from `assets/` as they are |
+| `## Roadmap` in `workflow.md`, `roadmap.md` | Where the roadmap lives, see "Roadmap". `roadmap.md` is copied from `assets/` only when `foreman/roadmap.md` is picked |
 | `index.md` | Last, because its presence marks setup complete. From `assets/index.md`, with rows only for files that exist |
 
 Commit each file as soon as it is settled, so `state.sh` can resume from
 what exists.
+
+## Roadmap
+
+In a new setup, after `workflow.md` is drafted, ask through
+`AskUserQuestion`:
+
+```
+Where does this project's roadmap live? The roadmap is the list of future tracks.
+
+1. foreman/roadmap.md
+   One line per future track, in the repo. Adding a line takes a commit and a merged PR.
+2. GitHub issues
+   One open issue labelled `roadmap` per future track. Adding one takes no commit.
+```
+
+Record the answer in `workflow.md` as one of two `## Roadmap` forms.
+
+`foreman/roadmap.md`: copy `assets/roadmap.md`, keep the `index.md` row
+from the asset, and write:
+
+```
+## Roadmap
+
+`foreman/roadmap.md`, one line per future track.
+```
+
+GitHub issues: first check gh works: an origin on github.com is set, `gh`
+is installed, and `gh auth status` passes. If it does, create the label
+with `gh label create roadmap --description "Future track"`; a label that
+already exists is success, left as it is. Write no `roadmap.md`. Write:
+
+````
+## Roadmap
+
+GitHub issues labelled `roadmap`, one open issue per future track.
+
+| Do | Run |
+|---|---|
+| List | `gh issue list --label roadmap --state open --limit 1000 --search "sort:created-asc"` |
+| Add | `gh issue create --label roadmap --title <title> --body <body>` |
+````
+
+and make the `index.md` Future tracks row:
+
+```
+| Future tracks: GitHub issues labelled `roadmap` | `workflow.md` |
+```
+
+### gh cannot be used
+
+Print the failure and the fix, then ask through `AskUserQuestion`:
+
+```
+GitHub issues cannot be used: `gh auth status` failed: You are not logged into any GitHub hosts.
+Fix: run `! gh auth login`, then run /foreman:setup again.
+
+1. Stop, fix gh, and run /foreman:setup again
+2. Use foreman/roadmap.md
+```
+
+Other failures change the first two lines only:
+
+| Failure | First line | Fix line |
+|---|---|---|
+| No origin | `GitHub issues cannot be used: origin is not set.` | `Fix: add a github.com origin, then run /foreman:setup again.` |
+| gh not installed | `GitHub issues cannot be used: gh is not installed.` | `Fix: install gh, then run /foreman:setup again.` |
+| Any other gh error | `GitHub issues cannot be used: <gh's first error line>` | none |
+
+When origin is not on GitHub, the first line reads
+`GitHub issues cannot be used: origin is git@gitlab.com:me/app.git, not on github.com.`
+(with the real origin), the fix line is left out, and the options are:
+
+```
+1. Stop setup
+2. Use foreman/roadmap.md
+```
+
+Record nothing until the user picks. Option 2 goes on as the
+`foreman/roadmap.md` form. Option 1 ends setup with every other file
+written and committed as usual, no `## Roadmap` section, no `roadmap.md`
+and no Future tracks row in `index.md`; the next run asks only the roadmap
+question.
 
 ## Style guides
 
