@@ -54,17 +54,12 @@ sections `none: <why>`.
   ask which is meant before settling the line.
 - An out-of-scope part the user still wants later goes on the roadmap, by
   `foreman/workflow.md` `## Roadmap`:
-  - GitHub issues: run its Add command. The title is the first sentence of
-    the description; the body is the rest, then a last line saying where it
-    came from, naming this track's id as the track it was deferred from.
-    `foreman/roadmap.md` is not edited and nothing is committed for it. If
-    the command fails, print the two lines every skill prints, open nothing,
-    commit nothing and stop. The failure and fix come from the table in
-    `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` under "gh cannot be used",
-    with ", then run /foreman:setup again" dropped from each Fix line; a
-    failure with no Fix line there prints only the first line.
-  - `foreman/roadmap.md`, or no `## Roadmap` section: a line in
-    `foreman/roadmap.md`, under its next id, which then goes up by one.
+  - GitHub issues form: run its Add command, title and body split as in
+    `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` "Roadmap", the body ending
+    `Deferred from <id>.`. Nothing is committed for it. A gh failure: as in
+    setup's "gh cannot be used", for other skills.
+  - Otherwise: a line in `foreman/roadmap.md`, under its next id, which then
+    goes up by one.
 - A UI track that needs a mockup gets `mockup.html` in the track folder:
   self-contained, a state switcher, built from root `DESIGN.md` tokens and
   the nearest screens; a missing token or screen is flagged, never invented.
@@ -100,5 +95,4 @@ to `spec.md`, `decisions.md` and `foreman/index.md`, nothing else.
 Ask whether the spec is done. On yes: `set-track.sh phase=implement
 sub_step=`, commit `docs(foreman): shape <id> done`, and print the next
 steps for the user: the block in
-`${CLAUDE_PLUGIN_ROOT}/skills/shape/assets/run-unattended.md`, verbatim. It
-holds the `/goal` line only, with no `/model` or auto mode line.
+`${CLAUDE_PLUGIN_ROOT}/skills/shape/assets/run-unattended.md`, verbatim.

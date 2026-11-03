@@ -15,13 +15,12 @@ Run `gate.sh base` right before every worker spawn and before `/simplify`:
 it records the tree that `gate.sh diff` measures changes against, here and
 in the worker's own stop hook.
 
-Runs under `/goal` on Opus; shape and status print the commands.
+Runs under `/goal`; shape and status print the line.
 
 ## Model
 
-Before anything else, check the model this session runs on. When it is not
-Opus, print this with the session's model name in place of `Sonnet 5.5`, and
-stop: no state check, plan, commit or spawn.
+Before anything else, when this session is not on Opus, print this with its
+model name in place of `Sonnet 5.5`, and stop.
 
 ```
 Implement runs on Opus. This session runs on Sonnet 5.5.

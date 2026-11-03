@@ -19,7 +19,7 @@ the branch it runs on, never main: main's copy is stale until the merge.
   - tasks checked and BLOCKED out of the total in `plan.md`;
   - `proof.md` rows by result.
 - Next: the command for the phase. shape: `/foreman:shape`. implement: the block in
-  `${CLAUDE_PLUGIN_ROOT}/skills/shape/assets/run-unattended.md`, verbatim (the `/goal` line only, no `/model` or auto mode line). prove: `/foreman:prove`. ship:
+  `${CLAUDE_PLUGIN_ROOT}/skills/shape/assets/run-unattended.md`, verbatim. prove: `/foreman:prove`. ship:
   `/foreman:ship`. Status `blocked`: each `| BLOCKED: <reason>` task line
   in `plan.md`.
 
@@ -32,20 +32,16 @@ only in `tracks.md` on that branch.
 
 Then the roadmap, by `foreman/workflow.md` `## Roadmap`:
 
-- GitHub issues: run its List command and print `Roadmap`, then one line per
-  open issue, `#<number> <title>`, oldest first. An issue whose track is in
-  progress is listed like any other. No open issue prints `Roadmap: none`. If
-  the command fails, print in place of the list the two lines every skill
-  prints, with `Roadmap: ` in front of the first. The failure and fix come
-  from the table in `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` under "gh
-  cannot be used", with ", then run /foreman:setup again" dropped from each
-  Fix line; a failure with no Fix line there prints only the first line.
-  For an auth failure:
+- GitHub issues form: run its List command and print `Roadmap`, then one
+  line per open issue, `#<number> <title>`, oldest first. An issue whose
+  track is in progress is listed like any other. No open issue prints
+  `Roadmap: none`. A gh failure prints, in place of the list, the lines from
+  `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` "gh cannot be used", for
+  other skills, with `Roadmap: ` in front of the first:
   ```
   Roadmap: GitHub issues cannot be used: `gh auth status` failed: You are not logged into any GitHub hosts.
   Fix: run `! gh auth login`.
   ```
-  Bug issues are not listed.
-- `foreman/roadmap.md`, or no `## Roadmap` section: under `Roadmap`, each
+- Otherwise: under `Roadmap`, each
   `R<n>` line of `foreman/roadmap.md`. A roadmap line has no status: starting
   it removes it.

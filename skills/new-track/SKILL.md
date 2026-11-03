@@ -26,13 +26,10 @@ first.
 ## The track
 
 - Description: `$ARGUMENTS`, else ask for it, offering the lines in
-  `foreman/roadmap.md`, or the open `roadmap` issues when `foreman/workflow.md`
-  `## Roadmap` says GitHub issues (run its List command). A roadmap id such as
-  `R3` takes that line. On a project whose `## Roadmap` says GitHub issues,
-  `R<n>` stops with:
+  `foreman/roadmap.md`. A roadmap id such as `R3` takes that line. When
+  `foreman/workflow.md` `## Roadmap` is the GitHub issues form, offer the
+  open `roadmap` issues (its List command) instead, and `R<n>` stops with:
   `This project's roadmap is in GitHub issues. Start from an open issue, or type a description.`
-  A project with no `## Roadmap` section, or one naming `foreman/roadmap.md`,
-  keeps `R<n>` as above.
 - `#N` starts from issue N, on either roadmap choice and whatever the issue's
   labels. Read it with `gh issue view N --json number,title,body,state,url`.
   Before anything is written, stop with one of these lines when:
@@ -41,11 +38,8 @@ first.
   - the issue does not exist, or `N` is a pull request (the `url` holds
     `/pull/`; gh resolves a pull request number too):
     `Issue #N does not exist. Start from an open issue, or type a description.`
-  - gh fails: print the two lines `GitHub issues cannot be used: <failure>.`
-    and `Fix: <fix>.`, taken from the failure table in
-    `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` "gh cannot be used" with
-    ", then run /foreman:setup again" dropped from each Fix line; a failure
-    with no Fix line prints only the first. Open nothing, write nothing.
+  - gh fails: as in `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` "gh
+    cannot be used", for other skills.
 
   Otherwise the issue's title and body are the description, and the track
   goes on as for a typed one. The issue stays open: the PR closes it at
@@ -81,14 +75,13 @@ From `${CLAUDE_PLUGIN_ROOT}/skills/new-track/assets/` into
 
 | File | Holds |
 |---|---|
-| `metadata.json` | phase `shape`, sub_step `user`, status `active`, UTC timestamps. Keep the asset's shape: one key per line, each string value on its key's line, because `state.sh` parses it with sed. Every later change goes through `${CLAUDE_PLUGIN_ROOT}/scripts/set-track.sh`, never by hand. A track started from `#N` also gets `  "issue": "N",` on its own line after `branch`, a string like the rest; other tracks get no such key |
+| `metadata.json` | phase `shape`, sub_step `user`, status `active`, UTC timestamps. Keep the asset's shape: one key per line, each string value on its key's line, because `state.sh` parses it with sed. Every later change goes through `${CLAUDE_PLUGIN_ROOT}/scripts/set-track.sh`, never by hand. A track started from `#N` also gets `  "issue": "N",` on its own line after `branch` |
 | `index.md` | Links to the track files |
 | `spec.md` | Every heading, `open` under each |
 | `decisions.md` | The shape question list. A line the project files already answer is settled by reference, its evidence the file and section (`ux.md#states`), and shape never re-asks it |
 
 Append `| <id> | <title> | shape | <branch> |` to `foreman/tracks.md`. A
-description taken from a `foreman/roadmap.md` line removes that line; one
-taken from an issue removes nothing.
+description taken from a `foreman/roadmap.md` line removes that line.
 
 ## Commit
 

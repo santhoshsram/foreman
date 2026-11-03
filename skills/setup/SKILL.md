@@ -25,11 +25,9 @@ first.
 - Then run `${CLAUDE_PLUGIN_ROOT}/scripts/state.sh`. `setup_complete: true`
   means setup is done: say so and stop; project files change at ship or by
   hand, not by a second setup. The one exception is a `workflow.md` with no
-  `## Roadmap` section: run "Roadmap on a set-up project" below and nothing
-  else. With a `## Roadmap` section in either form, stop as said. Otherwise
-  resume at the first file in the
-  table below that `files` reports missing, and never re-ask what a present
-  file settles. A `product.md` without `## Who uses it` holds only the
+  `## Roadmap` section: run only "Roadmap on a set-up project" below.
+  Otherwise resume at the first file in the table below that `files`
+  reports missing, and never re-ask what a present file settles. A `product.md` without `## Who uses it` holds only the
   product statement: `state.sh` reports it present, but resume at its draft.
 
 ## Read the repo first
@@ -83,7 +81,7 @@ project; anything about one feature belongs to a track.
 | `workflow.md` | From `assets/workflow.md`. Commands, test paths, scopes and conventions come from the repo; a command the repo lacks is `none yet`, never invented. `gate.sh` and the worker guards parse the Commands rows and Test paths, so keep their names. Ask only: what does done mean, and where is it released |
 | `code_styleguides/` | Copied, see below |
 | `learnings.md`, `tracks.md` | Copied from `assets/` as they are |
-| `## Roadmap` in `workflow.md`, `roadmap.md` | Where the roadmap lives, see "Roadmap". `roadmap.md` is copied from `assets/` only when `foreman/roadmap.md` is picked |
+| `## Roadmap` in `workflow.md`, `roadmap.md` | Where the roadmap lives, see "Roadmap" |
 | `index.md` | Last, because its presence marks setup complete. From `assets/index.md`, with rows only for files that exist |
 
 Commit each file as soon as it is settled, so `state.sh` can resume from
@@ -103,7 +101,9 @@ Where does this project's roadmap live? The roadmap is the list of future tracks
    One open issue labelled `roadmap` per future track. Adding one takes no commit.
 ```
 
-Record the answer in `workflow.md` as one of two `## Roadmap` forms.
+Record the answer in `workflow.md` as one of two `## Roadmap` forms. Every
+skill reads the roadmap by this section: a `workflow.md` with no
+`## Roadmap` section reads as the `foreman/roadmap.md` form.
 
 `foreman/roadmap.md`: copy `assets/roadmap.md`, keep the `index.md` row
 from the asset, and write:
@@ -116,8 +116,8 @@ from the asset, and write:
 
 GitHub issues: first check gh works: an origin on github.com is set, `gh`
 is installed, and `gh auth status` passes. If it does, create the label
-with `gh label create roadmap --description "Future track"`; a label that
-already exists is success, left as it is. Write no `roadmap.md`. Write:
+with `gh label create roadmap --description "Future track"`; an existing
+label is success, left as it is. Write no `roadmap.md`. Write:
 
 ````
 ## Roadmap
@@ -135,6 +135,12 @@ and make the `index.md` Future tracks row:
 ```
 | Future tracks: GitHub issues labelled `roadmap` | `workflow.md` |
 ```
+
+An issue made from a future track's text, by migration below or by shape's
+defer, splits it this way. Join wrapped lines with single spaces. The title
+is the first sentence: the text up to and including the period of the
+first `. ` outside backticks, or the whole text when it has none. The rest
+is the body.
 
 ### gh cannot be used
 
@@ -171,23 +177,26 @@ written and committed as usual, no `## Roadmap` section, no `roadmap.md`
 and no Future tracks row in `index.md`; the next run asks only the roadmap
 question.
 
+Other skills that hit a gh failure print the same First line and Fix line
+from the table above, with ", then run /foreman:setup again" dropped from
+the Fix line, or the First line alone when the table has no Fix line. They
+offer no options, open nothing, commit nothing and stop.
+
 ### Roadmap on a set-up project
 
-Runs when `setup_complete: true` and `workflow.md` has no `## Roadmap`
-section. Ask only the roadmap question above, and handle gh failure as
-above: option 1 "Stop" or "Stop, fix gh, and run /foreman:setup again" ends
-the run with nothing recorded, and the next run asks again.
+Ask only the roadmap question above, and handle gh failure as above:
+option 1 "Stop" or "Stop, fix gh, and run /foreman:setup again" ends the
+run with nothing recorded, and the next run asks again.
 
 Work on branch `chore/foreman-roadmap`, not the setup branch, which was
 merged long ago. If it exists locally or on the remote, switch to it and
-continue and read its `roadmap.md`; otherwise create it off main.
+read its `roadmap.md`; otherwise create it off main.
 
-Write the `index.md` Future tracks row in either choice: the row from the
-asset for `foreman/roadmap.md`, the issues row above for GitHub issues,
-replacing any existing Future tracks row.
+In either choice, write the `## Roadmap` section and the `index.md` Future
+tracks row, replacing any existing one: the asset's row for
+`foreman/roadmap.md`, the issues row above for GitHub issues.
 
-**`foreman/roadmap.md` picked.** Write the `## Roadmap` section and the row.
-If `foreman/roadmap.md` is missing, as after "Stop" in a new setup, create it
+**`foreman/roadmap.md` picked.** If `foreman/roadmap.md` is missing, as after "Stop" in a new setup, create it
 from `assets/roadmap.md` with the preamble and `Next id: R1`. Commit once,
 `docs(foreman): record roadmap choice`, and print:
 
@@ -201,20 +210,15 @@ migrate:
 
 - A line is one `- R<n>:` item in `roadmap.md`, however many lines it wraps
   to. The preamble and `Next id` are not lines.
-- Join the item's wrapped lines with single spaces. The title is the first
-  sentence without `R<n>: `: the text up to and including the period of the
-  first `. ` outside backticks, or the whole line when it has none. The rest
-  is the body.
-- Open one issue per line, in file order, with
-  `gh issue create --label roadmap --title <title> --body <body>`. Remove the
+- Split each line, without `R<n>: `, into title and body as above.
+- Open one issue per line, in file order, with the Add command. Remove the
   line from `roadmap.md` as soon as its issue exists, so a run that fails
   halfway leaves only the lines not yet moved and the next run opens no
   duplicate.
 - Once the first issue is open, a gh failure prints the failure and its Fix
   line from the table and stops setup. Offer no fallback: the moved lines are
-  already gone from `roadmap.md`. The next run continues the migration.
-- With no line left, delete `roadmap.md`, write the `## Roadmap` section in
-  `workflow.md`, rewrite the index row, and commit once,
+  already gone from `roadmap.md`.
+- With no line left, delete `roadmap.md` and commit once,
   `docs(foreman): move roadmap to GitHub issues`. Stage `foreman/` paths only.
 
 Print the summary, counting and listing only the issues opened in this run:
@@ -230,9 +234,6 @@ Merge branch chore/foreman-roadmap to finish: push it and open a PR.
   number, `#5, #6, #9`.
 - 0 lines: leave out the Moved line.
 - No `roadmap.md`: leave out the Moved and Deleted lines.
-
-The issues exist on GitHub before the branch merges; the last line says to
-merge it.
 
 ## Style guides
 
