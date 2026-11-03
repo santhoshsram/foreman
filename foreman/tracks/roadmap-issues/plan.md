@@ -17,6 +17,7 @@ files this track changes" are ship's, which syncs project files.
 - [x] 05 feat(status): roadmap from issues and goal-only hand-off | AC: AC9, AC11, AC13 | deps: 01 [dc11476]
 - [x] 06 feat(shape): defer to a roadmap issue and goal-only close | AC: AC10, AC12, AC13 | deps: 01 [3828af3]
 - [x] 07 feat(implement): stop on a model other than Opus | AC: AC14 | deps: none [16e172c]
+- [ ] 08 fix(shape): goal line ends on phase=ship or a stop for the user | AC: AC13 | deps: 05
 
 ## 01 feat(setup): ask where the roadmap lives in a new setup
 
@@ -343,3 +344,39 @@ Free choice: wording of the rule.
 
 ### Out of scope
 - Prove's model.
+
+## 08 fix(shape): goal line ends on phase=ship or a stop for the user
+
+### Goal
+The `/goal` line that shape and status print ends the run when prove
+closes or when a foreman skill stops for the user, so the `/goal` check
+never loops on `manual` proof lines or on implement's Opus message.
+Replaces the line task 05 put in the asset.
+Spec: §Experience "Implement hand-off (J7, J8)"; AC13
+
+### Context
+- Read first: spec §Experience "Implement hand-off (J7, J8)",
+  `skills/shape/assets/run-unattended.md`
+
+### Contract
+`skills/shape/assets/run-unattended.md`, byte for byte:
+```
+Start implement with:
+
+/goal Follow /foreman:implement for the track on this branch, then /foreman:prove, until set-track.sh prints phase=ship or status=blocked, or a foreman skill stops for the user with a stop report, the Opus message, or a question only the user can answer; or stop after 200 turns.
+```
+Free choice: none.
+
+### Behaviour
+- B1 The asset shall hold exactly the Contract block's two lines and the
+  blank line between them.
+- B2 No other file under `skills/` shall still hold the old `/goal` line.
+
+### Tests
+- File: none (prose)
+
+### Files
+- `skills/shape/assets/run-unattended.md`
+
+### Out of scope
+- Shape's and status's text around the asset.
