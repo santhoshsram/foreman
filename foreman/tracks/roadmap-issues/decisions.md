@@ -70,4 +70,5 @@ cell is written `\|`.
 | eng | challenger r2 FIX §Contracts: tech-stack text said a roadmap line needs no branch, and the State line went stale | settled | "a future track needs no branch until it starts"; State line extended | spec §Contracts |
 | eng | challenger r2 FIX §Contracts: wrapped lines were not joined before finding the first sentence | settled | Joined with single spaces; title keeps its period | spec §Contracts |
 | eng | challenger r2 FIX §Acceptance criteria: rerun, existing branch, `roadmap.md` pick and existing label had no criterion | settled | AC1, AC2, AC3 extended | spec §Acceptance criteria |
+| eng | challenger round 3 | settled | Not run: the user closed the challenger after round 2 so the spec stops growing | user: "Close shape now" |
 | eng | What stays untouched | settled | `state.sh`, `set-track.sh`, `check-index.sh`, gate and guard scripts, agents, implement, prove, review | user: "Approve as written"; spec §Reuse and untouched |
