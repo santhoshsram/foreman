@@ -17,3 +17,9 @@ date | track | phase | type | note | pointer
 2026-10-23 | - | review | decision | foreman:review keeps the style guides; /code-review is not fed them | skills/review/SKILL.md
 2026-10-23 | - | new-track | decision | No skill pushes, opens a PR or merges unasked; commit is the skill's, the rest the user's | guideline.md#git-boundary
 2026-10-24 | - | review | decision | Review sends accepted fixes to the implementer under the gates; only implement close applies /code-review --fix in place | skills/review/SKILL.md
+2026-11-03 | roadmap-issues | implement | harness | Foreman's own workflow.md had no gate command or test paths, so gate.sh could not run on its first track | foreman/workflow.md#gates
+2026-11-03 | roadmap-issues | prove | harness | /goal check read "a line per AC" as every check run and looped on manual lines; end the goal on a printed line instead | skills/shape/assets/run-unattended.md
+2026-11-03 | roadmap-issues | prove | pitfall | Skill prose has no harness; prove runs skills through subagents in a scratch repo with gh logged out via GH_CONFIG_DIR | foreman/archive/roadmap-issues/proof.md
+2026-11-03 | roadmap-issues | shape | harness | Challenger round 2 found 13 edge cases; the user closed shape before round 3 to stop spec growth | foreman/archive/roadmap-issues/decisions.md
+2026-11-03 | roadmap-issues | shape | harness | User wants small fixes raised mid-track folded into the track, not filed as roadmap lines | foreman/archive/roadmap-issues/decisions.md
+2026-11-03 | roadmap-issues | implement | pitfall | Prose under a parsed section is parsed: a code span under ## Test paths becomes a glob | scripts/guard-paths.sh

@@ -20,7 +20,7 @@
 - Test paths and gate commands are project data in `foreman/workflow.md`,
   so the scripts know no language.
 - State: markdown and one JSON file per track under `foreman/` in each
-  project repo.
+  project repo; the roadmap in GitHub issues when setup chose them.
 - Python 3 only for a script that bash makes unreadable. None yet.
 
 ## Contested choices
@@ -29,7 +29,9 @@
   skill text is rewritten. `upstreams.md` records the commit taken; a later
   skill diffs from it.
 - **Markdown state in the repo, not GitHub issues or a database.** It travels
-  with the branch, survives session death, and works on web.
+  with the branch, survives session death, and works on web. The roadmap
+  alone may live in GitHub issues, chosen at setup, because a future track
+  needs no branch until it starts.
 - **Workers as agents, not inline.** The split between test-writer and
   implementer is what makes red and green mean something, and each worker
   runs on a pinned model with a turn cap.
