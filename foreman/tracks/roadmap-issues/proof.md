@@ -69,10 +69,10 @@ throwaway GitHub repo, with this branch's plugin loaded.
   print the "Any other gh error" row instead, which the spec also allows.
 - AC14: implement on Sonnet with this track's real state, phase `prove`
   -> held: the model check ran before the state check and nothing changed.
-- AC3: migration rerun from a different checkout after a halfway failure
-  -> outside AC3 as written: removed lines are uncommitted until the final
-  commit, so another checkout sees the full `roadmap.md` and would open
-  duplicates. Not filed: a solo developer reruns in the same checkout,
-  where AC3 holds. Listed as a `review:` decision.
+- AC3: migration rerun after a halfway failure, in the same checkout ->
+  held: the lines already moved are gone from the working `roadmap.md`, so
+  the rerun opens issues only for the lines left. A rerun from a different
+  checkout would see the full file and open duplicates; `decisions.md`
+  settles that as accepted behaviour, a `review:` decision, not a criterion.
 - AC13: a `/model` or auto mode line surviving anywhere in the hand-off
   path -> held: none in the asset, shape or status.
