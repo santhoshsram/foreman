@@ -71,4 +71,6 @@ cell is written `\|`.
 | eng | challenger r2 FIX §Contracts: wrapped lines were not joined before finding the first sentence | settled | Joined with single spaces; title keeps its period | spec §Contracts |
 | eng | challenger r2 FIX §Acceptance criteria: rerun, existing branch, `roadmap.md` pick and existing label had no criterion | settled | AC1, AC2, AC3 extended | spec §Acceptance criteria |
 | eng | challenger round 3 | settled | Not run: the user closed the challenger after round 2 so the spec stops growing | user: "Close shape now" |
+| user | Is the implement hand-off fix part of this track, or a roadmap line | settled | This track: shape and status suggest only the `/goal` line; implement checks the model and asks the user to switch to Opus | user: "just fix it in this. shape should just suggest the goal command tos tart implement. implement shoul dcheck model and ask user to switch model if the necessary model if it is not opus" |
+| ux | Does anything still mention auto mode | settled | No: the user asked only for the model check | user: "implement shoul dcheck model"; spec §Experience |
 | eng | What stays untouched | settled | `state.sh`, `set-track.sh`, `check-index.sh`, gate and guard scripts, agents, implement, prove, review | user: "Approve as written"; spec §Reuse and untouched |

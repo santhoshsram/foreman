@@ -8,6 +8,10 @@ future track costs a commit and a merged PR; with issues, it costs one
 issue. `foreman/roadmap.md` stays the default. Tracks, specs and decisions
 never leave the repo.
 
+Also: the hand-off to implement stops telling a user already on Opus in
+auto mode to switch again. Shape and status suggest only the `/goal`
+line; implement itself checks the model.
+
 ## Users and journeys
 
 The solo developer of `product.md`, on a GitHub-hosted project.
@@ -35,6 +39,11 @@ The solo developer of `product.md`, on a GitHub-hosted project.
 - J6 Defer a part. Given shape on a project on GitHub issues, when the user
   wants an out-of-scope part later, then shape opens it as an issue
   labelled `roadmap`.
+- J7 Start implement. Given shape closing, or `/foreman:status` on a
+  track in implement, then the skill suggests only the `/goal` line, with
+  no `/model opus` line and no "turn on auto mode" line.
+- J8 Wrong model. Given `/foreman:implement` started on a model other than
+  Opus, then implement does no work and asks the user to switch to Opus.
 
 ## Experience
 
@@ -188,6 +197,23 @@ Roadmap: GitHub issues cannot be used: `gh auth status` failed: You are not logg
 Fix: run `! gh auth login`.
 ```
 
+### Implement hand-off (J7, J8)
+
+Shape's close and status print:
+
+```
+Start implement with:
+
+/goal Follow /foreman:implement for the track on this branch until every task in its plan.md is checked or BLOCKED and gate.sh all prints ok, then /foreman:prove until proof.md has a line per acceptance criterion; or stop after 200 turns.
+```
+
+Implement on a model other than Opus stops before any work:
+
+```
+Implement runs on Opus. This session runs on Sonnet 5.5.
+Run `/model opus`, then send the /goal line again.
+```
+
 ## Acceptance criteria
 
 - AC1: When `/foreman:setup` runs on a new project, it asks the roadmap
@@ -238,6 +264,12 @@ Fix: run `! gh auth login`.
 - AC12: When gh fails in new-track `#N`, an added future track, or shape's
   defer, the skill prints the failure as in §Experience, opens nothing and
   commits nothing. Proof: command output.
+- AC13: When shape closes, or status runs on a track in implement, the
+  output holds the `/goal` line as in §Experience and no `/model` or auto
+  mode line. Proof: command output.
+- AC14: When `/foreman:implement` starts on a model other than Opus, it
+  prints the message in §Experience and writes, commits and spawns
+  nothing. Proof: command output.
 
 ## Contracts
 
@@ -357,7 +389,8 @@ Reused: new-track's `R<n>` path for `#N`; the `Closes #N` line already in
 ship's `pr-body.md`; `gh`, already allowed.
 
 Untouched: `state.sh`, `set-track.sh`, `check-index.sh`, the gate and
-guard scripts, the agents, implement, prove and review. Tracks, specs and
+guard scripts, the agents, prove and review. Implement changes only by
+the model check. Tracks, specs and
 decisions stay markdown on the branch.
 
 ## Out of scope
