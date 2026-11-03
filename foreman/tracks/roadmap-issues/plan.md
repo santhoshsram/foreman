@@ -17,7 +17,7 @@ files this track changes" are ship's, which syncs project files.
 - [x] 05 feat(status): roadmap from issues and goal-only hand-off | AC: AC9, AC11, AC13 | deps: 01 [dc11476]
 - [x] 06 feat(shape): defer to a roadmap issue and goal-only close | AC: AC10, AC12, AC13 | deps: 01 [3828af3]
 - [x] 07 feat(implement): stop on a model other than Opus | AC: AC14 | deps: none [16e172c]
-- [ ] 08 fix(shape): goal line ends on phase=ship or a stop for the user | AC: AC13 | deps: 05
+- [x] 08 fix(shape): goal line ends on phase=ship or a stop for the user | AC: AC13 | deps: 05 [4bb51c1]
 
 ## 01 feat(setup): ask where the roadmap lives in a new setup
 
