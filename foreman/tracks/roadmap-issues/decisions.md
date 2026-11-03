@@ -30,12 +30,12 @@ cell is written `\|`.
 | ux | Nearest existing screen or command | settled | Setup's own questions, `/foreman:new-track R<n>`, the Roadmap part of `/foreman:status all` | user: "Approve as written"; spec §Experience |
 | ux | States: empty, loading, error, done | settled | Empty: `Roadmap: none`. Loading: none, gh calls are short. Error: the gh failure plus its fix; a closed or missing issue stops new-track. Done: the migration summary, the `Opened #N` line | user: "Approve as written"; spec §Experience |
 | ux | Mockup or exact output | settled | The exact output in the spec is the mockup | user: "Approve as written"; spec §Experience |
-| eng | Options, the winner, and what flips it | open | | |
-| eng | Contracts that change: CLI output, API, schema, file format | open | | |
+| eng | Options, the winner, and what flips it | settled | Choice in `workflow.md`, read by every skill; no new skill, no pointer file. A need to list or add roadmap items outside a session would flip it toward a skill | user: "Approve as written"; spec §Alternatives considered |
+| eng | Contracts that change: CLI output, API, schema, file format | settled | `workflow.md` `## Roadmap` in two forms; the index row; an optional `issue` key in `metadata.json`; the `roadmap` label; migration on `chore/foreman-roadmap` | user: "Approve as written"; spec §Contracts |
 | eng | Where the roadmap choice is recorded: `workflow.md` or elsewhere | settled | A `## Roadmap` section in `workflow.md`: `foreman/roadmap.md`, or GitHub issues labelled `roadmap` with the `gh issue list --label roadmap` command. roadmap.md is deleted on switch | user: "workflow.md row" |
-| eng | How tech-stack.md's contested choice "Markdown state in the repo, not GitHub issues" changes | open | | `tech-stack.md#contested-choices` |
-| eng | Who creates the `roadmap` label when the repo lacks it | open | | |
-| eng | Order of migration: issues are created before the setup branch that deletes roadmap.md merges | open | | |
-| eng | What `state.sh` reports for `roadmap.md` once issues hold the roadmap | open | | `scripts/state.sh` |
-| eng | What is reused | open | | |
-| eng | What stays untouched | open | | |
+| eng | How tech-stack.md's contested choice "Markdown state in the repo, not GitHub issues" changes | settled | Kept, plus: the roadmap alone may live in GitHub issues, chosen at setup, because a roadmap line needs no branch | user: "Approve as written"; spec §Contracts |
+| eng | Who creates the `roadmap` label when the repo lacks it | settled | Setup, with `gh label create roadmap --description "Future track" --force`, before the first issue | user: "Approve as written"; spec §Contracts |
+| eng | Order of migration: issues are created before the setup branch that deletes roadmap.md merges | settled | One issue per line in file order, each line removed once its issue exists, so a rerun opens no duplicate; one commit at the end; the summary says to merge | user: "Approve as written"; spec §Contracts |
+| eng | What `state.sh` reports for `roadmap.md` once issues hold the roadmap | settled | Unchanged: `roadmap.md: false`. Skills read `workflow.md` `## Roadmap`, not that flag | user: "Approve as written"; spec §Reuse and untouched |
+| eng | What is reused | settled | New-track's `R<n>` path, `Closes #N` in ship's `pr-body.md`, `gh` | user: "Approve as written"; spec §Reuse and untouched |
+| eng | What stays untouched | settled | `state.sh`, `set-track.sh`, `check-index.sh`, gate and guard scripts, agents, implement, prove, review | user: "Approve as written"; spec §Reuse and untouched |

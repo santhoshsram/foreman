@@ -157,19 +157,102 @@ Fix: run `! gh auth login`.
 
 ## Contracts
 
-open
+### `workflow.md` `## Roadmap`
+
+Setup writes one of two forms. Skills read this section to learn where the
+roadmap lives; a project with no such section is one setup has not asked.
+
+```
+## Roadmap
+
+`foreman/roadmap.md`, one line per future track.
+```
+
+```
+## Roadmap
+
+GitHub issues labelled `roadmap`, one open issue per future track.
+
+| Do | Run |
+|---|---|
+| List | `gh issue list --label roadmap --state open` |
+| Add | `gh issue create --label roadmap --title <title> --body <body>` |
+```
+
+### `foreman/index.md` row
+
+With issues, the "Future tracks" row points to `workflow.md`, so
+`check-index.sh` still finds a file:
+
+```
+| Future tracks: GitHub issues labelled `roadmap` | `workflow.md` |
+```
+
+### `metadata.json`
+
+A track started from an issue has one more key, written by new-track on
+its own line, a string like every other value:
+
+```
+  "issue": "42",
+```
+
+Ship fills `Closes #42` in the PR body from it. A track without the key
+gets no `Closes` line from it.
+
+### The `roadmap` label
+
+Setup creates it before the first issue, with
+`gh label create roadmap --description "Future track" --force`, so a repo
+that already has the label is left as it is.
+
+### Migration (J2)
+
+- Runs on branch `chore/foreman-roadmap` off main, because the setup
+  branch of a set-up project was merged long ago.
+- Setup opens one issue per `roadmap.md` line, in file order, and removes
+  each line from `roadmap.md` as soon as its issue exists. A run that fails
+  halfway leaves only the lines not yet moved, so the next run opens no
+  duplicate.
+- When no line is left: delete `roadmap.md`, write `## Roadmap` in
+  `workflow.md`, rewrite the index row, and commit once,
+  `docs(foreman): move roadmap to GitHub issues`.
+- The issues exist on GitHub before that branch merges. The summary says
+  to merge it.
+
+### Project files this track changes
+
+- `product.md`: the refusal and the `roadmap` vocabulary line, as in
+  `decisions.md`.
+- `tech-stack.md`: the contested choice becomes "Markdown state in the
+  repo, not GitHub issues or a database. It travels with the branch,
+  survives session death, and works on web. The roadmap alone may live in
+  GitHub issues, chosen at setup, because a roadmap line needs no branch."
 
 ## Alternatives considered
 
-open
+- `roadmap.md` kept as a pointer file: rejected by the user; the choice
+  lives in `workflow.md`.
+- A new `/foreman:roadmap` skill to list, add and switch: rejected; setup
+  asks once and every other skill reads `workflow.md`.
+- Closing the issue when the track starts: rejected; `Closes #N` closes it
+  at merge, so an abandoned track leaves the issue open.
+- GitHub Projects or milestones: out of scope.
 
 ## Non-functional
 
-open
+- No dependency beyond `gh`, which `tech-stack.md` already allows.
+- A session where `gh` is not logged in, such as some web sessions, sees
+  the gh error from §Experience, never a silent empty roadmap.
 
 ## Reuse and untouched
 
-open
+Reused: new-track's `R<n>` path for `#N`; the `Closes #N` line already in
+ship's `pr-body.md`; `gh`, already allowed.
+
+Untouched: `state.sh`, `set-track.sh`, `check-index.sh`, the gate and
+guard scripts, the agents, implement, prove and review. Tracks, specs and
+decisions stay markdown on the branch.
 
 ## Out of scope
 
