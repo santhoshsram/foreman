@@ -42,6 +42,5 @@ Then the roadmap, by `foreman/workflow.md` `## Roadmap`:
   Roadmap: GitHub issues cannot be used: `gh auth status` failed: You are not logged into any GitHub hosts.
   Fix: run `! gh auth login`.
   ```
-- Otherwise: under `Roadmap`, each
-  `R<n>` line of `foreman/roadmap.md`. A roadmap line has no status: starting
-  it removes it.
+- Otherwise: under `Roadmap`, each `R<n>` line of `foreman/roadmap.md`. A
+  roadmap line has no status: starting it removes it.

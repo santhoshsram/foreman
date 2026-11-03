@@ -25,10 +25,15 @@ first.
 - Then run `${CLAUDE_PLUGIN_ROOT}/scripts/state.sh`. `setup_complete: true`
   means setup is done: say so and stop; project files change at ship or by
   hand, not by a second setup. The one exception is a `workflow.md` with no
-  `## Roadmap` section: run only "Roadmap on a set-up project" below.
+  `## Roadmap` section: run only "Roadmap on a set-up project" below. Read
+  main's `workflow.md` for this once main has `foreman/index.md`, because a
+  merged setup branch is stale.
   Otherwise resume at the first file in the table below that `files`
-  reports missing, and never re-ask what a present file settles. A `product.md` without `## Who uses it` holds only the
-  product statement: `state.sh` reports it present, but resume at its draft.
+  reports missing, and never re-ask what a present file settles. A
+  `product.md` without `## Who uses it` holds only the product statement:
+  `state.sh` reports it present, but resume at its draft. Under the GitHub
+  issues form `roadmap.md` stays missing: the `## Roadmap` section settles
+  that row.
 
 ## Read the repo first
 
@@ -140,7 +145,8 @@ An issue made from a future track's text, by migration below or by shape's
 defer, splits it this way. Join wrapped lines with single spaces. The title
 is the first sentence: the text up to and including the period of the
 first `. ` outside backticks, or the whole text when it has none. The rest
-is the body.
+is the body. Pass each as one single-quoted argument, `'` written `'\''`:
+the text holds backticks, which double quotes would run as commands.
 
 ### gh cannot be used
 
@@ -190,11 +196,16 @@ run with nothing recorded, and the next run asks again.
 
 Work on branch `chore/foreman-roadmap`, not the setup branch, which was
 merged long ago. If it exists locally or on the remote, switch to it and
-read its `roadmap.md`; otherwise create it off main.
+read its `roadmap.md`; otherwise create it off main. When main has no
+`foreman/index.md`, as after "Stop" in a new setup whose branch is not
+merged yet, stay on `chore/foreman-setup` instead and name it in the Merge
+line below: main has no `workflow.md` to branch from.
 
 In either choice, write the `## Roadmap` section and the `index.md` Future
 tracks row, replacing any existing one: the asset's row for
-`foreman/roadmap.md`, the issues row above for GitHub issues.
+`foreman/roadmap.md`, the issues row above for GitHub issues. For GitHub
+issues, write them only once every line has moved, so a run that fails
+halfway leaves no section and the next run continues the migration.
 
 **`foreman/roadmap.md` picked.** If `foreman/roadmap.md` is missing, as after "Stop" in a new setup, create it
 from `assets/roadmap.md` with the preamble and `Next id: R1`. Commit once,
@@ -218,7 +229,8 @@ migrate:
 - Once the first issue is open, a gh failure prints the failure and its Fix
   line from the table and stops setup. Offer no fallback: the moved lines are
   already gone from `roadmap.md`.
-- With no line left, delete `roadmap.md` and commit once,
+- With no line left, delete `roadmap.md` if it exists, write the section
+  and the row, and commit once,
   `docs(foreman): move roadmap to GitHub issues`. Stage `foreman/` paths only.
 
 Print the summary, counting and listing only the issues opened in this run:

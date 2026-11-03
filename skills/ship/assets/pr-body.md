@@ -14,4 +14,4 @@ Not in this PR: <parked questions, out-of-scope follow-ups. Omit if none.>
 
 BREAKING CHANGE: <what breaks and the upgrade step. Omit if nothing breaks.>
 
-Closes #N
+Closes #<N, the track's "issue" in metadata.json. Omit if none.>

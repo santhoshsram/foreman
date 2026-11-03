@@ -86,7 +86,8 @@ description taken from a `foreman/roadmap.md` line removes that line.
 ## Commit
 
 One commit, `chore(foreman): start track <id>`, staging
-`foreman/tracks/<id>/`, `foreman/tracks.md` and `foreman/roadmap.md` only.
+`foreman/tracks/<id>/`, `foreman/tracks.md` and, when a line left it,
+`foreman/roadmap.md` only: under the GitHub issues form it does not exist.
 A web session resumes the track only once the branch is pushed.
 
 ## Hand off

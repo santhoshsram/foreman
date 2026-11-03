@@ -47,8 +47,8 @@ main with the PR.
 - Body: `${CLAUDE_PLUGIN_ROOT}/skills/ship/assets/pr-body.md`, plain labels,
   no headings: it becomes the squash commit body. Review notes list every
   `review:` decision; Not in this PR lists every parked line.
-- Closing line: `Closes #N` when the track's `metadata.json` has `"issue":
-  "N"`.
+- Closing line: from `"issue"` in `metadata.json`, which is under
+  `foreman/archive/<id>/` by now.
 - Show title and body, then ask whether to push and open the PR. On yes:
   push the branch and open it against main with `gh`. No `gh` or no remote:
   print the commands instead.

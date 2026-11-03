@@ -14,8 +14,9 @@
 
 `tests/*`
 
-None exist yet. The glob gives `gate.sh diff` and the worker guard a
-definition, so a prose-only task runs under the gates.
+None exist yet. The glob gives gate.sh diff and the worker guard a
+definition, so a prose-only task runs under the gates. No other code span
+here: the guard reads every one in this section as a glob.
 
 ## Gates
 
