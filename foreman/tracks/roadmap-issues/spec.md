@@ -204,8 +204,12 @@ Shape's close and status print:
 ```
 Start implement with:
 
-/goal Follow /foreman:implement for the track on this branch until every task in its plan.md is checked or BLOCKED and gate.sh all prints ok, then /foreman:prove until proof.md has a line per acceptance criterion; or stop after 200 turns.
+/goal Follow /foreman:implement for the track on this branch, then /foreman:prove, until set-track.sh prints phase=ship or status=blocked, or a foreman skill stops for the user with a stop report, the Opus message, or a question only the user can answer; or stop after 200 turns.
 ```
+
+The goal ends on a line the session prints, so the `/goal` check never
+judges the proof itself: `manual` proof lines and any stop for the user
+end the run instead of looping it.
 
 Implement on a model other than Opus stops before any work:
 
@@ -265,8 +269,9 @@ Run `/model opus`, then send the /goal line again.
   defer, the skill prints the failure as in §Experience, opens nothing and
   commits nothing. Proof: command output.
 - AC13: When shape closes, or status runs on a track in implement, the
-  output holds the `/goal` line as in §Experience and no `/model` or auto
-  mode line. Proof: command output.
+  output holds the `/goal` line as in §Experience, whose end condition is
+  `set-track.sh` printing `phase=ship` or `status=blocked` or a stop for
+  the user, and no `/model` or auto mode line. Proof: command output.
 - AC14: When `/foreman:implement` starts on a model other than Opus, it
   prints the message in §Experience and writes, commits and spawns
   nothing. Proof: command output.
