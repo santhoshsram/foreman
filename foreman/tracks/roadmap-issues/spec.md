@@ -82,7 +82,13 @@ When origin is not on GitHub, the first line reads:
 GitHub issues cannot be used: origin is git@gitlab.com:me/app.git, not on github.com.
 ```
 
-and the fix line is left out, because only option 2 can work.
+and the fix line is left out, because no fix makes GitHub issues work
+there. The options become:
+
+```
+1. Stop setup
+2. Use foreman/roadmap.md
+```
 
 Option 1 in a new setup ends setup with every other file written and
 committed as usual, no `## Roadmap` section and no `roadmap.md`, so the
@@ -110,13 +116,9 @@ Merge branch chore/foreman-roadmap to finish: push it and open a PR.
 
 ### Future track added (J3, J6)
 
-When the user asks for a future track, or shape defers a part:
-
-```
-Opened #44 "Upstream-diff skill", labelled `roadmap`.
-```
-
-The issue body is the future track's description, then where it came
+As today with `roadmap.md`, no skill owns this and no reply text is
+fixed: Claude runs the Add command in `workflow.md` `## Roadmap` and
+reports the issue number. The issue body is the future track's description, then where it came
 from, as a `roadmap.md` line holds. Shape names the track the part was
 deferred from.
 
@@ -141,11 +143,12 @@ A number that is a pull request counts as missing.
 
 ```
 Roadmap
-#42 Security review of a track's diff before ship
-#43 Drift report
+#42 Security review of a track's diff before ship: supply-chain risk in new dependencies, secrets, and common appsec flaws, each finding settled like a review fix.
+#43 Drift report: compare the code with the archived specs and the project files, and list each place they disagree.
 ```
 
-Each line is the issue number and its title, oldest first. No open
+Each line is the issue number and its title, oldest first. An issue whose
+track is in progress is listed like any other. No open
 `roadmap` issue prints `Roadmap: none`. When `gh` fails, status prints the
 failure and the fix in place of the list:
 
@@ -174,8 +177,8 @@ Fix: run `! gh auth login`.
   the failure as in §Experience, offers `foreman/roadmap.md`, and records
   nothing until the user picks. Proof: command output.
 - AC5: When the user asks for a future track on a project using issues, an
-  issue labelled `roadmap` is opened, no commit is made, and the
-  `Opened #N` line prints. Proof: command output.
+  issue labelled `roadmap` is opened and no commit is made. Proof: command
+  output.
 - AC6: When `/foreman:new-track #N` runs on an open issue, whatever its
   labels and whatever the roadmap choice, the track description is the
   issue's title and body, and the issue stays open. Proof: command output.
@@ -255,6 +258,9 @@ is.
 
 - A `roadmap.md` line is one `- R<n>:` item, however many lines it wraps
   to. The preamble and `Next id` are not lines.
+- The issue title is the line's first sentence without `R<n>: `: the text
+  up to the first `. ` outside backticks, or the whole line when it has
+  none. The rest of the line is the body.
 - Runs on branch `chore/foreman-roadmap` off main, because the setup
   branch of a set-up project was merged long ago. When that branch already
   exists, setup continues on it and reads its `roadmap.md`.
