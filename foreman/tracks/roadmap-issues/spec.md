@@ -91,15 +91,30 @@ there. The options become:
 ```
 
 Option 1 in a new setup ends setup with every other file written and
-committed as usual, no `## Roadmap` section and no `roadmap.md`, so the
-next run asks only the roadmap question, as in J2.
+committed as usual, no `## Roadmap` section, no `roadmap.md` and no
+Future tracks row in `index.md`, so the next run asks only the roadmap
+question, as in J2.
+
+Once migration has opened its first issue, a gh failure prints the
+failure and its Fix line and stops setup, with no fallback offered,
+because the moved lines are already gone from `roadmap.md`. The next run
+continues the migration.
 
 ### gh fails outside setup
 
 Whenever gh fails in `/foreman:new-track #N`, an added future track,
-shape's defer, or status, the skill prints the failure and its fix in the
-form status uses below, opens nothing, commits nothing and stops. For an
-error other than auth, it prints gh's first error line and no Fix line.
+shape's defer, or status, the skill prints two lines, opens nothing,
+commits nothing and stops:
+
+```
+GitHub issues cannot be used: <failure>.
+Fix: <fix>.
+```
+
+The failure and fix come from the setup table, with ", then run
+/foreman:setup again" dropped from each Fix line. A failure with no Fix
+line in that table prints only the first line. Status puts `Roadmap: ` in
+front of the first line.
 
 ### Existing roadmap moved to issues (J2)
 
@@ -109,18 +124,27 @@ Deleted foreman/roadmap.md. Recorded the choice in foreman/workflow.md under ## 
 Merge branch chore/foreman-roadmap to finish: push it and open a PR.
 ```
 
+- The Moved line counts and lists only the issues opened in this run.
 - 1 line: `Moved 1 roadmap line to GitHub issue #5 labelled `roadmap`.`
-- Numbers not consecutive, such as after a rerun: each number is listed,
-  `#5, #6, #9`.
-- 0 lines, or no `roadmap.md`: the Moved and Deleted lines are left out.
+- Numbers not consecutive, when other issues were opened meanwhile: each
+  number is listed, `#5, #6, #9`.
+- 0 lines: the Moved line is left out.
+- No `roadmap.md`: the Moved and Deleted lines are left out.
+
+J2 with `foreman/roadmap.md` picked prints:
+
+```
+Recorded the choice in foreman/workflow.md under ## Roadmap.
+Merge branch chore/foreman-roadmap to finish: push it and open a PR.
+```
 
 ### Future track added (J3, J6)
 
 As today with `roadmap.md`, no skill owns this and no reply text is
 fixed: Claude runs the Add command in `workflow.md` `## Roadmap` and
-reports the issue number. The issue body is the future track's description, then where it came
-from, as a `roadmap.md` line holds. Shape names the track the part was
-deferred from.
+reports the issue number. The title is the description's first sentence;
+the body is the rest, then where it came from, as a `roadmap.md` line
+holds. Shape names the track the part was deferred from.
 
 ### Track started from an issue (J4)
 
@@ -139,6 +163,13 @@ Issue #42 does not exist. Start from an open issue, or type a description.
 
 A number that is a pull request counts as missing.
 
+On a project using GitHub issues, `/foreman:new-track R<n>` stops,
+because migration dropped every `R<n>` id:
+
+```
+This project's roadmap is in GitHub issues. Start from an open issue, or type a description.
+```
+
 ### Roadmap in `/foreman:status all` (J5)
 
 ```
@@ -153,7 +184,7 @@ track is in progress is listed like any other. No open
 failure and the fix in place of the list:
 
 ```
-Roadmap: cannot read GitHub issues: `gh auth status` failed: You are not logged into any GitHub hosts.
+Roadmap: GitHub issues cannot be used: `gh auth status` failed: You are not logged into any GitHub hosts.
 Fix: run `! gh auth login`.
 ```
 
@@ -162,17 +193,22 @@ Fix: run `! gh auth login`.
 - AC1: When `/foreman:setup` runs on a new project, it asks the roadmap
   question as in §Experience and records the answer in `workflow.md` under
   `## Roadmap`. With GitHub issues picked, no `roadmap.md` is written, the
-  index row reads as in §Contracts, and the `roadmap` label exists. Proof:
+  index row reads as in §Contracts, and the `roadmap` label exists; an
+  existing `roadmap` label is left unchanged and setup goes on. Proof:
   command output.
 - AC2: When `/foreman:setup` runs on a set-up project whose `workflow.md`
-  has no `## Roadmap` section, it asks only the roadmap question. Proof:
+  has no `## Roadmap` section, it asks only the roadmap question. Picking
+  `foreman/roadmap.md` commits `docs(foreman): record roadmap choice` on
+  `chore/foreman-roadmap` and prints the lines in §Experience. Proof:
   command output.
 - AC3: When GitHub issues is picked on a project with N `roadmap.md`
   lines, N open issues labelled `roadmap` exist, each titled with its
   line's first sentence and without its `R<n>` id, and `roadmap.md` is
   gone, on branch `chore/foreman-roadmap`, in one commit
   `docs(foreman): move roadmap to GitHub issues`, with the index row
-  rewritten and the summary as in §Experience. Proof: command output.
+  rewritten and the summary as in §Experience. A rerun after a failure on
+  a line continues on `chore/foreman-roadmap` and opens issues only for
+  the lines left. Proof: command output.
 - AC4: When GitHub issues is picked and gh cannot be used, setup prints
   the failure as in §Experience, offers `foreman/roadmap.md`, and records
   nothing until the user picks. Proof: command output.
@@ -183,7 +219,8 @@ Fix: run `! gh auth login`.
   labels and whatever the roadmap choice, the track description is the
   issue's title and body, and the issue stays open. Proof: command output.
 - AC7: When `/foreman:new-track #N` runs on a closed or missing issue, or
-  a pull request, it stops with the message in §Experience. Proof: command
+  a pull request, or `/foreman:new-track R<n>` runs on a project using
+  GitHub issues, it stops with the message in §Experience. Proof: command
   output.
 - AC8: When a track started from issue #N ships, its PR body carries
   `Closes #N`. Proof: command output.
@@ -195,8 +232,9 @@ Fix: run `! gh auth login`.
   it opens an issue labelled `roadmap` instead of editing `roadmap.md`.
   Proof: command output.
 - AC11: On a project whose `workflow.md` records `foreman/roadmap.md`, or
-  has no `## Roadmap` section, setup, new-track `R<n>`, status and shape
-  behave as today. Proof: command output.
+  has no `## Roadmap` section, new-track `R<n>`, status and shape behave as
+  today. On a set-up project whose `workflow.md` has a `## Roadmap`
+  section, in either form, setup behaves as today. Proof: command output.
 - AC12: When gh fails in new-track `#N`, an added future track, or shape's
   defer, the skill prints the failure as in §Experience, opens nothing and
   commits nothing. Proof: command output.
@@ -258,9 +296,10 @@ is.
 
 - A `roadmap.md` line is one `- R<n>:` item, however many lines it wraps
   to. The preamble and `Next id` are not lines.
-- The issue title is the line's first sentence without `R<n>: `: the text
-  up to the first `. ` outside backticks, or the whole line when it has
-  none. The rest of the line is the body.
+- The item's wrapped lines are joined with single spaces first. The
+  issue title is then the first sentence without `R<n>: `: the text up to
+  and including the period of the first `. ` outside backticks, or the
+  whole line when it has none. The rest of the line is the body.
 - Runs on branch `chore/foreman-roadmap` off main, because the setup
   branch of a set-up project was merged long ago. When that branch already
   exists, setup continues on it and reads its `roadmap.md`.
@@ -271,14 +310,18 @@ is.
   `workflow.md`, rewrite the index row, and commit once,
   `docs(foreman): move roadmap to GitHub issues`.
 - A J2 pick of `foreman/roadmap.md` writes the section on the same branch
-  and commits once, `docs(foreman): record roadmap choice`.
+  and commits once, `docs(foreman): record roadmap choice`. When the
+  project has no `roadmap.md`, as after option 1 "Stop" in a new setup,
+  the same commit writes it with the preamble and `Next id: R1`.
+- J2 writes the `index.md` Future tracks row in either choice.
 - The issues exist on GitHub before that branch merges. The summary says
   to merge it.
 
 ### Project files this track changes
 
 - `product.md`, the refusal, exactly: "A system of record outside the
-  repo. Everything is markdown on the branch. GitHub holds PRs and issues:
+  repo. Tracks, specs and decisions are markdown on the branch. GitHub
+  holds PRs and issues:
   roadmap issues when setup chose them, and any issue a track starts from.
   Markdown in the repo stays the default."
 - `product.md`, the vocabulary line: "**roadmap**: the future tracks, one
@@ -287,7 +330,10 @@ is.
 - `tech-stack.md`: the contested choice becomes "Markdown state in the
   repo, not GitHub issues or a database. It travels with the branch,
   survives session death, and works on web. The roadmap alone may live in
-  GitHub issues, chosen at setup, because a roadmap line needs no branch."
+  GitHub issues, chosen at setup, because a future track needs no branch
+  until it starts."
+- `tech-stack.md`, the State line gains "; the roadmap in GitHub issues
+  when setup chose them."
 
 ## Alternatives considered
 

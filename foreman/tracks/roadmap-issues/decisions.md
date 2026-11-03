@@ -57,4 +57,17 @@ cell is written `\|`.
 | ux | challenger r1 FIX §Experience: the body of an added or deferred issue was undefined | settled | Description, then where it came from; shape names the source track | spec §Experience |
 | user | challenger r1 FIX §Contracts: the refusal's text was only a gist, and did not cover issues a track starts from | settled | Exact text given, covering any issue a track starts from | spec §Contracts |
 | user | challenger r1 FIX §Users and journeys: "roadmap item" is a synonym of "future track" | settled | "future track" throughout | spec §Users and journeys; `product.md#vocabulary` |
+| eng | challenger r2 FIX §Acceptance criteria: AC11 said setup on a no-section project behaves as today, against AC2 | settled | AC11 split: other skills as today without a section; setup as today only with a section | spec §Acceptance criteria |
+| ux | challenger r2 FIX §Experience: `/foreman:new-track R<n>` had no outcome on an issues project | settled | Stops with its own message; AC7 | spec §Experience |
+| ux | challenger r2 FIX §Experience: gh failure text outside setup borrowed status's prefix and lacked the non-auth cases | settled | Two exact lines from the setup table, Fix without the rerun clause; status adds `Roadmap: ` | spec §Experience |
+| eng | challenger r2 FIX §Contracts: a gh failure mid-migration offered the `roadmap.md` fallback, a switch back | settled | After the first issue, no fallback; setup stops and the next run continues | spec §Experience |
+| ux | challenger r2 FIX §Experience: a rerun cannot list the earlier run's issue numbers | settled | The Moved line counts and lists only this run's issues | spec §Experience |
+| ux | challenger r2 FIX §Experience: 0 lines hid the deletion of `roadmap.md` | settled | 0 lines drops only the Moved line | spec §Experience |
+| ux | challenger r2 FIX §Experience: a J2 pick of `foreman/roadmap.md` had no output and no merge line | settled | Recorded line plus merge line | spec §Experience |
+| eng | challenger r2 FIX §Contracts: after option 1 "Stop", the index row and a later `roadmap.md` pick named a missing file | settled | No Future tracks row after Stop; J2 writes the row in either choice and creates `roadmap.md` when missing | spec §Contracts |
+| ux | challenger r2 FIX §Experience: the title of an added or deferred issue was undefined | settled | First sentence of the description; the rest is the body | spec §Experience |
+| user | challenger r2 FIX §Contracts: the refusal opened "Everything is markdown on the branch" and then allowed issues | settled | "Tracks, specs and decisions are markdown on the branch" | spec §Contracts |
+| eng | challenger r2 FIX §Contracts: tech-stack text said a roadmap line needs no branch, and the State line went stale | settled | "a future track needs no branch until it starts"; State line extended | spec §Contracts |
+| eng | challenger r2 FIX §Contracts: wrapped lines were not joined before finding the first sentence | settled | Joined with single spaces; title keeps its period | spec §Contracts |
+| eng | challenger r2 FIX §Acceptance criteria: rerun, existing branch, `roadmap.md` pick and existing label had no criterion | settled | AC1, AC2, AC3 extended | spec §Acceptance criteria |
 | eng | What stays untouched | settled | `state.sh`, `set-track.sh`, `check-index.sh`, gate and guard scripts, agents, implement, prove, review | user: "Approve as written"; spec §Reuse and untouched |
