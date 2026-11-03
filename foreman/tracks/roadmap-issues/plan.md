@@ -15,7 +15,7 @@ files this track changes" are ship's, which syncs project files.
 - [x] 03 feat(new-track): start a track from GitHub issue #N | AC: AC6, AC7, AC12 | deps: 01 [aa80fb4]
 - [x] 04 feat(ship): close the source issue from the PR body | AC: AC8 | deps: 03 [6ce5df4]
 - [x] 05 feat(status): roadmap from issues and goal-only hand-off | AC: AC9, AC11, AC13 | deps: 01 [dc11476]
-- [ ] 06 feat(shape): defer to a roadmap issue and goal-only close | AC: AC10, AC12, AC13 | deps: 01
+- [x] 06 feat(shape): defer to a roadmap issue and goal-only close | AC: AC10, AC12, AC13 | deps: 01 [3828af3]
 - [ ] 07 feat(implement): stop on a model other than Opus | AC: AC14 | deps: none
 
 ## 01 feat(setup): ask where the roadmap lives in a new setup
