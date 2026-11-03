@@ -5,7 +5,7 @@ One line per future track: its id, the line worded as its
 `R<n>` and is never reused, so a removed line leaves a gap. new-track
 removes the line it starts.
 
-Next id: R15
+Next id: R16
 
 - R1: Multi-session planning above tracks: a map of decision tickets resolved
   one per session. From Matt Pocock's `wayfinder` skill,
@@ -52,3 +52,8 @@ Next id: R15
 - R14: Project-wide `foreman/decisions.md` for big decisions that affect the
   whole project. Today a `decisions.md` exists only per track, so a big
   decision is archived with its track. From the user on 2026-11-02.
+- R15: Shape and status print only the `/goal` line to start implement,
+  not `/model opus` or "turn on auto mode": a skill cannot see the
+  session's model or mode, so those lines tell a user already on Opus in
+  auto mode to redo them. From `skills/shape/assets/run-unattended.md`;
+  the user on 2026-11-03.
