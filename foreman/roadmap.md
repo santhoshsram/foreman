@@ -5,7 +5,7 @@ One line per future track: its id, the line worded as its
 `R<n>` and is never reused, so a removed line leaves a gap. new-track
 removes the line it starts.
 
-Next id: R15
+Next id: R16
 
 - R1: Multi-session planning above tracks: a map of decision tickets resolved
   one per session. From Matt Pocock's `wayfinder` skill,

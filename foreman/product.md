@@ -19,8 +19,10 @@ would do right unprompted?
 - A factory with an agent per role. Modes are smart; roles are prose.
 - A prescriptive procedure. Skills encode goals, constraints and interfaces,
   not steps.
-- A system of record outside the repo. Everything is markdown on the branch.
-  GitHub holds PRs only.
+- A system of record outside the repo. Tracks, specs and decisions are
+  markdown on the branch. GitHub holds PRs and issues: roadmap issues when
+  setup chose them, and any issue a track starts from. Markdown in the repo
+  stays the default.
 - A generic product. If a choice serves that developer's projects and nobody else,
   it is the right choice.
 
@@ -47,7 +49,8 @@ One word per concept. No synonyms.
   researcher, test-writer, implementer.
 - **proof**: evidence per acceptance criterion, produced by the orchestrator.
 - **learning**: one line in `learnings.md`.
-- **roadmap**: `roadmap.md`, one line per future track.
+- **roadmap**: the future tracks, one line each in `roadmap.md` or one open
+  issue labelled `roadmap` each, as `workflow.md` records.
 - **upstream**: a repo foreman copied material from.
 - **guideline**: the autonomy rules that decide when a worker stops.
 

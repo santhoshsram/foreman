@@ -1,6 +1,6 @@
 {
   "name": "foreman",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "One routine for every project and every feature: setup once, then per track shape, implement, prove, ship. Project knowledge and track state live as markdown in the repo.",
   "author": {
     "name": "Santhosh Sundararaman",

@@ -52,8 +52,14 @@ sections `none: <why>`.
   the spec would have to guess.
 - A word in an answer that conflicts with the vocabulary in `product.md`:
   ask which is meant before settling the line.
-- An out-of-scope part the user still wants later becomes a line in
-  `foreman/roadmap.md`, under its next id, which then goes up by one.
+- An out-of-scope part the user still wants later goes on the roadmap, by
+  `foreman/workflow.md` `## Roadmap`:
+  - GitHub issues form: run its Add command, title and body split as in
+    `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` "Roadmap", the body ending
+    `Deferred from <id>.`. Nothing is committed for it. A gh failure: as in
+    setup's "gh cannot be used", for other skills.
+  - Otherwise: a line in `foreman/roadmap.md`, under its next id, which then
+    goes up by one.
 - A UI track that needs a mockup gets `mockup.html` in the track folder:
   self-contained, a state switcher, built from root `DESIGN.md` tokens and
   the nearest screens; a missing token or screen is flagged, never invented.
@@ -88,5 +94,5 @@ to `spec.md`, `decisions.md` and `foreman/index.md`, nothing else.
 
 Ask whether the spec is done. On yes: `set-track.sh phase=implement
 sub_step=`, commit `docs(foreman): shape <id> done`, and print the next
-steps for the user, who alone can switch model and mode: the block in
+steps for the user: the block in
 `${CLAUDE_PLUGIN_ROOT}/skills/shape/assets/run-unattended.md`, verbatim.

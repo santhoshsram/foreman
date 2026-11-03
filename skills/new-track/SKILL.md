@@ -1,7 +1,7 @@
 ---
 name: new-track
-description: Start a track, one feature or fix, on its own worktree and branch. Writes the track folder under foreman/tracks/ with a seeded question list and a registry row, commits, then starts shape. Use for "/foreman:new-track <description>", "start a feature", or "new track for X".
-argument-hint: "[description | roadmap id]"
+description: Start a track, one feature or fix, on its own worktree and branch. Writes the track folder under foreman/tracks/ with a seeded question list and a registry row, commits, then starts shape. Use for "/foreman:new-track <description>", "/foreman:new-track #42", "start a feature", or "new track for X".
+argument-hint: "[description | roadmap id | #N]"
 ---
 
 # New track
@@ -26,7 +26,24 @@ first.
 ## The track
 
 - Description: `$ARGUMENTS`, else ask for it, offering the lines in
-  `foreman/roadmap.md`. A roadmap id such as `R3` takes that line.
+  `foreman/roadmap.md`. A roadmap id such as `R3` takes that line. When
+  `foreman/workflow.md` `## Roadmap` is the GitHub issues form, offer the
+  open `roadmap` issues (its List command) instead, and `R<n>` stops with:
+  `This project's roadmap is in GitHub issues. Start from an open issue, or type a description.`
+- `#N` starts from issue N, on either roadmap choice and whatever the issue's
+  labels. Read it with `gh issue view N --json number,title,body,state,url`.
+  Before anything is written, stop with one of these lines when:
+  - the issue is closed:
+    `Issue #N is closed. Start from an open issue, or type a description.`
+  - the issue does not exist, or `N` is a pull request (the `url` holds
+    `/pull/`; gh resolves a pull request number too):
+    `Issue #N does not exist. Start from an open issue, or type a description.`
+  - gh fails: as in `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` "gh
+    cannot be used", for other skills.
+
+  Otherwise the issue's title and body are the description, and the track
+  goes on as for a typed one. The issue stays open: the PR closes it at
+  merge.
 - From it, propose the title, the type and the id, and confirm all three in
   one batch. The type is a Conventional Commits type (feat, fix, refactor,
   perf, docs, chore), because it prefixes the branch and the PR title.
@@ -58,7 +75,7 @@ From `${CLAUDE_PLUGIN_ROOT}/skills/new-track/assets/` into
 
 | File | Holds |
 |---|---|
-| `metadata.json` | phase `shape`, sub_step `user`, status `active`, UTC timestamps. Keep the asset's shape: one key per line, each string value on its key's line, because `state.sh` parses it with sed. Every later change goes through `${CLAUDE_PLUGIN_ROOT}/scripts/set-track.sh`, never by hand |
+| `metadata.json` | phase `shape`, sub_step `user`, status `active`, UTC timestamps. Keep the asset's shape: one key per line, each string value on its key's line, because `state.sh` parses it with sed. Every later change goes through `${CLAUDE_PLUGIN_ROOT}/scripts/set-track.sh`, never by hand. A track started from `#N` also gets `  "issue": "N",` on its own line after `branch` |
 | `index.md` | Links to the track files |
 | `spec.md` | Every heading, `open` under each |
 | `decisions.md` | The shape question list. A line the project files already answer is settled by reference, its evidence the file and section (`ux.md#states`), and shape never re-asks it |
@@ -69,7 +86,8 @@ description taken from a `foreman/roadmap.md` line removes that line.
 ## Commit
 
 One commit, `chore(foreman): start track <id>`, staging
-`foreman/tracks/<id>/`, `foreman/tracks.md` and `foreman/roadmap.md` only.
+`foreman/tracks/<id>/`, `foreman/tracks.md` and, when a line left it,
+`foreman/roadmap.md` only: under the GitHub issues form it does not exist.
 A web session resumes the track only once the branch is pushed.
 
 ## Hand off

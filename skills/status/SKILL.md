@@ -30,4 +30,17 @@ line per track: id, phase, sub-step, status, branch, next command. A track
 whose branch has no worktree here, such as one a web session created, shows
 only in `tracks.md` on that branch.
 
-Then, under `Roadmap`, each `R<n>` line of `foreman/roadmap.md`. A roadmap line has no status: starting it removes it.
+Then the roadmap, by `foreman/workflow.md` `## Roadmap`:
+
+- GitHub issues form: run its List command and print `Roadmap`, then one
+  line per open issue, `#<number> <title>`, oldest first. An issue whose
+  track is in progress is listed like any other. No open issue prints
+  `Roadmap: none`. A gh failure prints, in place of the list, the lines from
+  `${CLAUDE_PLUGIN_ROOT}/skills/setup/SKILL.md` "gh cannot be used", for
+  other skills, with `Roadmap: ` in front of the first:
+  ```
+  Roadmap: GitHub issues cannot be used: `gh auth status` failed: You are not logged into any GitHub hosts.
+  Fix: run `! gh auth login`.
+  ```
+- Otherwise: under `Roadmap`, each `R<n>` line of `foreman/roadmap.md`. A
+  roadmap line has no status: starting it removes it.

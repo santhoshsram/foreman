@@ -8,12 +8,20 @@
 | Install locally | `/plugin marketplace add santhoshsram/foreman` then `/plugin install foreman@foreman` |
 | Try a skill | open a sample repo and run `/foreman:<skill>` |
 | Test | none yet |
-| Lint | none yet |
+| Lint | `for f in scripts/*.sh; do bash -n "$f" \|\| exit 1; done && scripts/check-index.sh` |
+
+## Test paths
+
+`tests/*`
+
+None exist yet. The glob gives gate.sh diff and the worker guard a
+definition, so a prose-only task runs under the gates. No other code span
+here: the guard reads every one in this section as a glob.
 
 ## Gates
 
-None yet. Foreman is prose and bash. A gate arrives with the first script
-that has tests.
+Lint only: a syntax check of every script and `check-index.sh`. A test gate
+arrives with the first script that has tests.
 
 ## Branches, commits, PRs
 
