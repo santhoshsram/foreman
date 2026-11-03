@@ -38,4 +38,23 @@ cell is written `\|`.
 | eng | Order of migration: issues are created before the setup branch that deletes roadmap.md merges | settled | One issue per line in file order, each line removed once its issue exists, so a rerun opens no duplicate; one commit at the end; the summary says to merge | user: "Approve as written"; spec §Contracts |
 | eng | What `state.sh` reports for `roadmap.md` once issues hold the roadmap | settled | Unchanged: `roadmap.md: false`. Skills read `workflow.md` `## Roadmap`, not that flag | user: "Approve as written"; spec §Reuse and untouched |
 | eng | What is reused | settled | New-track's `R<n>` path, `Closes #N` in ship's `pr-body.md`, `gh` | user: "Approve as written"; spec §Reuse and untouched |
+| ux | challenger r1 FIX §Experience: no origin, gh not installed and other gh errors had no outcome at setup | settled | Failure table added | spec §Experience |
+| ux | challenger r1 CONTEST §Experience: origin not on GitHub; whether option 1 "Stop, fix gh" is still offered | open | | |
+| eng | challenger r1 FIX §Acceptance criteria: AC4 option 1 "Stop" in a new setup had no defined state | settled | Other files committed, no `## Roadmap`, no `roadmap.md`; rerun asks only the roadmap question | spec §Experience |
+| ux | challenger r1 FIX §Experience: gh failure in new-track `#N`, added future track and shape's defer had no outcome | settled | Print failure and fix, open nothing, commit nothing, stop; AC12 | spec §Experience |
+| ux | challenger r1 FIX §Experience: one message served both a closed and a missing issue | settled | Separate missing-issue message; a pull request counts as missing | spec §Experience |
+| ux | challenger r1 FIX §Experience: migration summary lacked the merge line and forms for 0, 1 and non-consecutive issues | settled | Merge line and the three forms added | spec §Experience |
+| ux | challenger r1 CONTEST §Acceptance criteria: issue title is the line's "first sentence" in AC3, but the text before the colon in the mockups | open | | |
+| eng | challenger r1 FIX §Contracts: a `roadmap.md` line was undefined | settled | One `- R<n>:` item, however many lines; preamble and `Next id` are not lines | spec §Contracts |
+| eng | challenger r1 FIX §Contracts: rerun after a halfway failure, and a J2 pick of `foreman/roadmap.md`, had no branch or commit | settled | Continue on an existing `chore/foreman-roadmap`; `docs(foreman): record roadmap choice` | spec §Contracts |
+| eng | challenger r1 FIX §Contracts: `--force` overwrites an existing label, and a new project that picks issues never created it | settled | Created whenever issues is picked, without `--force`; already-exists counts as success | spec §Contracts |
+| eng | challenger r1 FIX §Contracts: a project with no `## Roadmap` section had no outcome outside setup | settled | Uses `foreman/roadmap.md`, as today; AC11 | spec §Contracts |
+| eng | challenger r1 FIX §Contracts: the List command returns newest first and stops at 30, against AC9 | settled | `--limit 1000 --search "sort:created-asc"` | spec §Contracts |
+| eng | challenger r1 FIX §Acceptance criteria: no criterion covered the index row, label, branch or single commit | settled | AC1 and AC3 extended | spec §Acceptance criteria |
+| user | challenger r1 FIX §Users and journeys: J4 narrowed to `roadmap` or `bug` and did not say it works on a `roadmap.md` project | settled | Any open issue, either roadmap choice; "description" for the issue is now "body" | spec §Users and journeys |
+| user | challenger r1 CONTEST §Users and journeys: an issue in progress stays listed under Roadmap, and a second `/foreman:new-track #N` starts a duplicate track | open | | |
+| eng | challenger r1 CONTEST §Users and journeys: no skill owns "the user asks for a new future track", so nothing carries AC5's exact `Opened #N` line | open | | |
+| ux | challenger r1 FIX §Experience: the body of an added or deferred issue was undefined | settled | Description, then where it came from; shape names the source track | spec §Experience |
+| user | challenger r1 FIX §Contracts: the refusal's text was only a gist, and did not cover issues a track starts from | settled | Exact text given, covering any issue a track starts from | spec §Contracts |
+| user | challenger r1 FIX §Users and journeys: "roadmap item" is a synonym of "future track" | settled | "future track" throughout | spec §Users and journeys; `product.md#vocabulary` |
 | eng | What stays untouched | settled | `state.sh`, `set-track.sh`, `check-index.sh`, gate and guard scripts, agents, implement, prove, review | user: "Approve as written"; spec §Reuse and untouched |
